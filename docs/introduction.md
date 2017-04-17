@@ -6,7 +6,9 @@ This sample depends on Volley for the network API calls and [Glide](https://gith
 download and show the images. Moreover, this project uses the awesome [Open Movie Database](http://www.omdbapi.com)
 that allows the usage of their own API to get information about movies.
 
-The different steps to build the project, can be resumed in the following:
+![Architeture of the application]()
 
+The following image depicts the layout and the storyboard of our application.
+![Layout and storyboard of the application]()
 
 Ok, you can now start with the first step - [Preparing your project](https://github.com/pontocom/MovieSearch/blob/master/docs/PreparingYourProject.md).
