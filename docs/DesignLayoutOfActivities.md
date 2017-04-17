@@ -24,4 +24,4 @@ The views of this activity are:
 * A `TextView` that will display the movie actors: `tvMovieActors`
 * A `TextView` that will display the movie plot: `tvMovieDescription`
 
-The next step will to implement the functionality of the MainActivity.
+The next step will to implement the [functionality of the MainActivity](https://github.com/pontocom/MovieSearch/blob/master/docs/ImplementMainActivity.md).
