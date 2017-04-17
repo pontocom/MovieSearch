@@ -124,27 +124,58 @@ It contains a JSON array with the results that need to be processed:
 
 ```json
 {
-"Response":
-"True",
-"Search":
-[
-{
-"Poster":
-"https://images-na.ssl-images-amazon.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg",
-"Title":
-"The Avengers",
-"Type":
-"movie",
-"Year":
-"2012",
-"imdbID":
-"tt0848228"
-}
-],
-"totalResults":
-"89"
+    "Response":
+    "True",
+    "Search":
+    [{
+        "Poster":
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg",
+        "Title":
+        "The Avengers",
+        "Type":
+        "movie",
+        "Year":
+        "2012",
+        "imdbID":
+        "tt0848228"
+    }],
+    "totalResults":
+    "89"
 }
 ```
+Therefore it is necessary to iterate this array and create an array of movies, that will contain the 
+list of movies obtained in the answer. It is ncessary to add these two class variables.
+ 
+```java
+    protected String[] moviesResult;
+    protected ArrayList<Movie> arrayOfMovies;
+```
+
+`moviesResult` is an array with the movies name, that will be added to a basic ListView, and `arrayOfMovies` 
+contains all the details of a Movie that are store on the model we have created previously.
+
+```java
+            arrayOfMovies = new ArrayList<Movie>();
+
+            moviesResult = new String[listMovies.length()];
+            for(int i = 0; i < listMovies.length(); i++) {
+                JSONObject jmovie = listMovies.getJSONObject(i);
+                Log.i("MovieDatabase", jmovie.getString("Title"));
+                moviesResult[i] = jmovie.getString("Title");
+                arrayOfMovies.add(i, new Movie(jmovie.getString("Title"), jmovie.getString("Year"), jmovie.getString("imdbID"), jmovie.getString("Poster")));
+            }
+```
+
+### Add the array to the ListView
+Finally, the `moviesResult` array is added to the ListView.
+
+```java
+            ArrayAdapter<String> moviesArrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, moviesResult);
+            lvSearchResults.setAdapter(moviesArrayAdapter);
+```
+
+## Handle the user selection on the ListView of results
+
 
 ```java
 public class MainActivity extends AppCompatActivity {
