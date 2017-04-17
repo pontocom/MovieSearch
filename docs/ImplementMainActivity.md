@@ -87,6 +87,32 @@ Using Volley we will prepare and send the API web resquest and prepare to handle
         requestQueue.add(stringRequest);
 ```
 
+### Handle the JSON answer from web API
+On the `onResponse` function, the `String response` variable will contain the response from the remote API. This response is formated using JSON format.
+
+It is necessary to handle this answer and process it appropriately.
+
+```java
+                        Log.i("MovieDatabase", response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if(jsonObject.getString("Response").compareTo("True") == 0) {
+                                JSONArray listMovies = jsonObject.getJSONArray("Search");
+
+
+                            } else {
+                                Toast.makeText(MainActivity.this, "Some error occured while getting movies information!", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (Exception e) {
+                            Log.i("GuideMeApp", "Error processing the JSON answer -> " + e.getMessage());
+                            e.printStackTrace();
+                        }
+``` 
+
 ```java
 public class MainActivity extends AppCompatActivity {
     protected EditText etSearch;
