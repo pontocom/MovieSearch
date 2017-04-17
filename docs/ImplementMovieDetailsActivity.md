@@ -1,5 +1,5 @@
 # Implement the MovieDetailsActivity functionality
-This will be used to implement and present to the end-user the details of the movie that the user selected on the previous activity `MainActivity`
+This will be used to implement and present to the end-user the details of the movie that the user selected on the previous activity `MainActivity`.
 
 ## Handling the connection to the layout views
 This first thing to accomplish is to create the connection between the views that were placed in the layout design (XML) and the the `MovieDetailsActivity.java`.
@@ -46,7 +46,21 @@ With this, data from the **Intent** is obtained and part of it (**MOVIENAME**, *
 ## Display the movie poster
 Another piece of information received with the **Intent** is the **URL** of the **image** that contains the movie poster we want to display for the user (**MOVIEPOSTER**).
 
+For this, we are going to use Glide, that will save a lot of time to download, cache and display remote images.
 
+````java
+Glide  
+        .with(MovieDetailsActivity.this)  
+        .load(intent.getStringExtra("MOVIEPOSTER"))  
+        .asBitmap()  
+        .into(new BitmapImageViewTarget(ivMoviePoster) {  
+            @Override  
+            public void onResourceReady(Bitmap resource, GlideAnimation\<? super Bitmap\> glideAnimation) {  
+                super.onResourceReady(resource, glideAnimation);  
+  
+            }  
+        });
+````
 
 ## Obtain more details from the API service
 Since with the previous service search we only got some of the details of the movie, we need to make a second request, to baton further details from the movie. This new request will be made using the **IMDB id** of the movie - this is store on the `IMDBid` variable.
