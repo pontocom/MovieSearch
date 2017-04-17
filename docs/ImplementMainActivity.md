@@ -113,6 +113,39 @@ It is necessary to handle this answer and process it appropriately.
                         }
 ``` 
 
+### Process JSON answer and present results on ListView
+If the answer from the service is valid:
+
+```java
+if(jsonObject.getString("Response").compareTo("True") == 0)
+```
+
+It contains a JSON array with the results that need to be processed:
+
+```json
+{
+"Response":
+"True",
+"Search":
+[
+{
+"Poster":
+"https://images-na.ssl-images-amazon.com/images/M/MV5BMTk2NTI1MTU4N15BMl5BanBnXkFtZTcwODg0OTY0Nw@@._V1_SX300.jpg",
+"Title":
+"The Avengers",
+"Type":
+"movie",
+"Year":
+"2012",
+"imdbID":
+"tt0848228"
+}
+],
+"totalResults":
+"89"
+}
+```
+
 ```java
 public class MainActivity extends AppCompatActivity {
     protected EditText etSearch;
