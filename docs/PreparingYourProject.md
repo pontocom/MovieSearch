@@ -22,3 +22,5 @@ and add the following permission:
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
+
+After this, you may progress for the next step to [create a model to hold information for the Movie](https://github.com/pontocom/MovieSearch/blob/master/docs/CreateModelForMovies.md).

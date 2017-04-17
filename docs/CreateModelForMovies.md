@@ -68,3 +68,5 @@ Finally, add the different class getters and setters:
         this.moviePoster = moviePoster;
     }
 ```
+
+In the following step you will have to create a new [Activity to display the Movie details](https://github.com/pontocom/MovieSearch/blob/master/docs/CreateActivityForMovieDetails.md).
