@@ -36,19 +36,6 @@ Next, add the class constructor:
 Finally, add the different class getters and setters:
 
 ```java
-public class Movie {
-    public String movieName;
-    public String movieYear;
-    public String movieIMDBid;
-    public String moviePoster;
-
-    public Movie(String movieName, String movieYear, String movieIMDBid, String moviePoster) {
-        this.movieName = movieName;
-        this.movieYear = movieYear;
-        this.movieIMDBid = movieIMDBid;
-        this.moviePoster = moviePoster;
-    }
-
     public String getMovieName() {
         return movieName;
     }
@@ -80,5 +67,4 @@ public class Movie {
     public void setMoviePoster(String moviePoster) {
         this.moviePoster = moviePoster;
     }
-}
 ```
