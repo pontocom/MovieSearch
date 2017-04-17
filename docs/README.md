@@ -3,4 +3,6 @@
 2. [Create a Model to hold the movies information](https://github.com/pontocom/MovieSearch/blob/master/docs/CreateModelForMovies.md)
 3. Create a new Activity for Movie details
 4. Design the two activities layout
-5. 
+5. Implement the functionality of the MainActivity
+6. Implement the functionality of the MovieDetailsActivity
+7. Test it!!! And modify it at your own will!
