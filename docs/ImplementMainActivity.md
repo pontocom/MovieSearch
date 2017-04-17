@@ -49,6 +49,44 @@ Then, on the `MainActivity.class`, create the `clicarPesquisar` function.
     }
 ```
 
+## Implement the search functionality
+This section will present the implementation of the `clicarPesquisar` function.
+
+### Handle the search text
+After the user inserts text on the search field and presses the search button, the search field will have to cleared, and the text will have to encoded to be passed to the API endpoint.
+
+```java
+        String searchText = "";
+        try {
+            searchText = URLEncoder.encode(etSearch.getText().toString(), "utf-8");
+        } catch (Exception e) {
+            Log.i("MovieDatabase", "Wrong encoding " + e.getMessage());
+        }
+
+        etSearch.setText("");
+```
+
+### Build and send the API web request
+Using Volley we will prepare and send the API web resquest and prepare to handle the anwer from the remote service.
+
+```java
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://www.omdbapi.com/?s=" + searchText,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("MovieDatabase", error.toString());
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+```
+
 ```java
 public class MainActivity extends AppCompatActivity {
     protected EditText etSearch;
