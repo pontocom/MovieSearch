@@ -5,7 +5,7 @@ Fire up your Android Studio application and create a new project. Select the app
 (suggest not to be bellow SDK 5.0), add an Empty Activity (you may accept the defaults options), and hit the finish
 button. Wait until Android Studio finishes creating your project.
 
-### Adding need libraries to the project
+### Adding needed libraries to the project
 Add the following two lines to the `build.gradle` file, in the `dependencies` section:
 
 ```
