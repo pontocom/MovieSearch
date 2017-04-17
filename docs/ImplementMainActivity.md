@@ -175,97 +175,35 @@ Finally, the `moviesResult` array is added to the ListView.
 ```
 
 ## Handle the user selection on the ListView of results
+After all the results are displayed on the ListView, it should be possible for the user to select a specific
+result and get more details about it.
 
+### Add selection listener to the ListView
+On the `onCreate` function, add the ListView listener.
 
 ```java
-public class MainActivity extends AppCompatActivity {
-    protected EditText etSearch;
-    protected ListView lvSearchResults;
-
-    protected String[] moviesResult;
-    protected ArrayList<Movie> arrayOfMovies;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        etSearch = (EditText) findViewById(R.id.etSearch);
-        lvSearchResults = (ListView) findViewById(R.id.lvMoviesResults);
-
         lvSearchResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.i("APP", "Movie selected = " + arrayOfMovies.get(i).getMovieName());
+            }
+        });
+```
+
+The `onItemClick` function will be called when the user selects an option on the ListView, and receives the 
+number of the item selected.
+
+### Build Intent and start the new activity
+After the selection of an option on the ListView, an Intent with some information about the movie will be prepared an it will be passed to the MovieDetails Activity.
+
+```java
                 Intent intent = new Intent(MainActivity.this, MovieDetailsActivity.class);
                 intent.putExtra("MOVIENAME", arrayOfMovies.get(i).getMovieName());
                 intent.putExtra("MOVIEYEAR", arrayOfMovies.get(i).getMovieYear());
                 intent.putExtra("MOVIEIMDBID", arrayOfMovies.get(i).getMovieIMDBid());
                 intent.putExtra("MOVIEPOSTER", arrayOfMovies.get(i).getMoviePoster());
                 startActivity(intent);
-            }
-        });
-    }
-
-    public void clicarPesquisar(View v) {
-        String searchText = "";
-        try {
-            searchText = URLEncoder.encode(etSearch.getText().toString(), "utf-8");
-        } catch (Exception e) {
-            Log.i("MovieDatabase", "Wrong encoding " + e.getMessage());
-        }
-
-        etSearch.setText("");
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://www.omdbapi.com/?s=" + searchText,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("MovieDatabase", response);
-
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-
-                            if(jsonObject.getString("Response").compareTo("True") == 0) {
-                                JSONArray listMovies = jsonObject.getJSONArray("Search");
-
-                                arrayOfMovies = new ArrayList<Movie>();
-
-                                moviesResult = new String[listMovies.length()];
-                                for(int i = 0; i < listMovies.length(); i++) {
-                                    JSONObject jmovie = listMovies.getJSONObject(i);
-                                    Log.i("MovieDatabase", jmovie.getString("Title"));
-                                    moviesResult[i] = jmovie.getString("Title");
-                                    arrayOfMovies.add(i, new Movie(jmovie.getString("Title"), jmovie.getString("Year"), jmovie.getString("imdbID"), jmovie.getString("Poster")));
-                                }
-
-                                ArrayAdapter<String> moviesArrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, moviesResult);
-                                lvSearchResults.setAdapter(moviesArrayAdapter);
-
-                            } else {
-                                Toast.makeText(MainActivity.this, "Some error occured while getting movies information!", Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        } catch (Exception e) {
-                            Log.i("GuideMeApp", "Error processing the JSON answer -> " + e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("MovieDatabase", error.toString());
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-    }
-}
-
 ```
+
 
 In the next step, we will [implement the MovieDetails activity](https://github.com/pontocom/MovieSearch/blob/master/docs/ImplementMovieDetailsActivity.md).
