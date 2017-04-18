@@ -205,5 +205,10 @@ After the selection of an option on the ListView, an Intent with some informatio
                 startActivity(intent);
 ```
 
+|Intent Key|Intent Value|
+|—————|—————-|
+|MOVIENAME| getMovieName()|
 
-In the next step, we will [implement the MovieDetails activity](https://github.com/pontocom/MovieSearch/blob/master/docs/ImplementMovieDetailsActivity.md).
+In the next step, we will [implement the MovieDetails activity][1].
+
+[1]:	https://github.com/pontocom/MovieSearch/blob/master/docs/ImplementMovieDetailsActivity.md
