@@ -118,4 +118,4 @@ tvMovieDirector.setText(jsonObject.getString("Director"));
 tvMovieWriter.setText(jsonObject.getString("Writer"));
 ````
 
-And this is all it takes for the **MovieDetailsActivity**. Next you should try it, test it, and make modifications to it.
+And this is all it takes for the **MovieDetailsActivity**. Next you should try it, test it, and modify it as you wish.
